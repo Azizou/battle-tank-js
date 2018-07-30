@@ -1,2 +1,2 @@
 # battle-tank-js
-Jeu video battle tanken Javascript
+Jeu video battle tank en Javascript
