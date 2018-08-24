@@ -4,8 +4,10 @@
   "description": "Jeu video battle tank en Javascript",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint *.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/*.js",
+    "lint-fix": "eslint src/*.js --fix",
+    "test": "jasmine",
+    "pre-build": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,9 @@
   "devDependencies": {
     "eslint": "^5.4.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "express": "^4.16.3",
+    "gulp": "^4.0.0",
+    "jasmine": "^3.2.0"
   }
 }
