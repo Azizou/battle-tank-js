@@ -1,11 +1,13 @@
-/*global directions*/
+/* global directions */
+
+var module = module || {};
 
 // A simplre rectangle class
-var Rectangle = (function () {
+var Rectangle = (function Rectangle() {
   function Rectangle(x, y, w, h) {
     this.w = w;
     this.h = h;
-    this.x = x,
+    this.x = x;
     this.y = y;
     this.top = y;
     this.left = x;
@@ -19,21 +21,25 @@ var Rectangle = (function () {
    * @param {Rectangle} anotherRect the other rectangular object that might overlap the current one
    * @param {function} callback
    */
-  Rectangle.prototype.overlap = function (anotherRect, callback) {
-    if (this.x < (anotherRect.x + anotherRect.w) &&
-      anotherRect.x < (this.x + this.w) &&
-      this.y < (anotherRect.y + anotherRect.h) &&
-      anotherRect.y < (this.y + this.h)) {
-      callback();
+  Rectangle.prototype.overlap = function overlap(anotherRect, callback) {
+    if (this.x <= (anotherRect.x + anotherRect.w)
+      && anotherRect.x <= (this.x + this.w)
+      && this.y <= (anotherRect.y + anotherRect.h)
+      && anotherRect.y <= (this.y + this.h)) {
+      if (typeof callback === 'function') {
+        callback();
+      }
       return true;
     }
     return false;
   };
 
-  return Rectangle;
-})();
+  Rectangle.ZERO = new Rectangle(0, 0, 0, 0);
 
-var FillRect = (function () {
+  return Rectangle;
+}());
+
+var FillRect = (function FillRect() {
   function FillRect(x, y, w, h, color) {
     Rectangle.call(this, x, y, w, h);
     this.color = color;
@@ -41,17 +47,17 @@ var FillRect = (function () {
   FillRect.prototype = Object.create(Rectangle.prototype);
   FillRect.prototype.constructor = FillRect;
 
-  FillRect.prototype.draw = function (renderer) {
+  FillRect.prototype.draw = function draw(renderer) {
     var rStyle = renderer.fillStyle;
     renderer.fillStyle = this.color;
     renderer.fillRect(this.x, this.y, this.w, this.h);
     renderer.fillStyle = rStyle;
   };
   return FillRect;
-})();
+}());
 
 // eslint-disable-next-line no-unused-vars
-var StrokeRect = (function () {
+var StrokeRect = (function StrokeRect() {
   function StrokeRect(x, y, w, h, color) {
     Rectangle.call(this, x, y, w, h);
     this.color = color;
@@ -59,17 +65,18 @@ var StrokeRect = (function () {
   StrokeRect.prototype = Object.create(Rectangle.prototype);
   StrokeRect.prototype.constructor = StrokeRect;
 
-  StrokeRect.prototype.draw = function (renderer) {
+  StrokeRect.prototype.draw = function draw(renderer) {
     var sStyle = renderer.strokeStyle;
-    renderer.strokeStyle = this.color;
+    var ctx = renderer;
+    ctx.strokeStyle = this.color;
     renderer.strokeStyle(this.x, this.y, this.w, this.h);
-    renderer.strokeStyle = sStyle;
+    ctx.strokeStyle = sStyle;
   };
 
   return StrokeRect;
-})();
+}());
 
-var MovableObject = (function () {
+var MovableObject = (function MovableObject() {
   function MovableObject(x, y, dt, direction, stepX, stepY) {
     this.x = x;
     this.y = y;
@@ -80,15 +87,15 @@ var MovableObject = (function () {
     this.thicker = 0;
   }
 
-  MovableObject.prototype.update = function () {
-    this.thicker++;
-    if (this.thicker == this.dt) {
+  MovableObject.prototype.update = function update() {
+    this.thicker += 1;
+    if (this.thicker === this.dt) {
       this.thicker = 0;
       this.updatePosition();
     }
   };
 
-  MovableObject.prototype.getAngle = function(direction) {
+  MovableObject.prototype.getAngle = function getAngle(direction) {
     var res = 0;
     switch (direction) {
     case directions.NORTH:
@@ -103,11 +110,13 @@ var MovableObject = (function () {
     case directions.WEST:
       res = -Math.PI / 2;
       break;
+    default:
+      break;
     }
     return res;
   };
 
-  MovableObject.prototype.updatePosition = function () {
+  MovableObject.prototype.updatePosition = function updatePosition() {
     switch (this.direction) {
     case directions.EAST:
       this.x += this.stepX;
@@ -126,10 +135,10 @@ var MovableObject = (function () {
     }
   };
   return MovableObject;
-})();
+}());
 
 // eslint-disable-next-line no-unused-vars
-var Sprite = (function () {
+var Sprite = (function Sprite() {
   Sprite.prototype = Object.create(Rectangle.prototype);
   Sprite.prototype.constructor = Sprite;
 
@@ -142,91 +151,91 @@ var Sprite = (function () {
   }
 
 
-  Sprite.prototype.loadImage = function () {
+  Sprite.prototype.loadImage = function loadImage() {
     this.image = new Image();
-    this.image.onload = function (response) {
+    this.image.onload = function onload(response) {
       this.ready = true;
-      this.onLoadCallback && this.onLoadCallback.call(null, response);
+      if (typeof this.onLoadCallback === 'function') {
+        this.onLoadCallback.call(null, response);
+      }
     };
     this.image.src = this.src;
   };
 
-  Sprite.prototype.draw = function (render) {
+  Sprite.prototype.draw = function draw(render) {
     render.drawImage(this.image, this.x, this.y, this.w, this.h);
   };
 
-  Sprite.prototype.overlap = function (anotherSprite, callback) {
-    return Rectangle.overlap(this, anotherSprite, callback);
-  };
+  // Sprite.prototype.overlap = function (anotherSprite, callback) {
+  //   return Rectangle.overlap(this, anotherSprite, callback);
+  // };
   return Sprite;
-})();
+}());
 
 // eslint-disable-next-line no-unused-vars
-var MovableSprite = (function(){
+var MovableSprite = (function MovableSprite() {
   MovableSprite.prototype = Object.create(Sprite.prototype);
   Object.assign(MovableSprite.prototype, MovableObject.prototype);
   MovableSprite.prototype.constructor = MovableSprite;
 
-  function MovableSprite(x,y,w,h,imagePath,onLoadCallback,speed,step,direction) {
-    Sprite.call(this,x,y,w,h,imagePath,onLoadCallback);
-    MovableObject.call(this,x,y,speed,direction,step,step);
+  function MovableSprite(x, y, w, h, imagePath, onLoadCallback, speed, step, direction) {
+    Sprite.call(this, x, y, w, h, imagePath, onLoadCallback);
+    MovableObject.call(this, x, y, speed, direction, step, step);
   }
 
-  MovableSprite.prototype.draw = function(renderer){
+  MovableSprite.prototype.draw = function draw(renderer) {
     renderer.save();
     renderer.translate(this.x + this.w / 2, this.y + this.h / 2);
     renderer.rotate(this.getAngle(this.direction));
-    renderer.drawImage(this.image, -this.w / 2 , -this.h / 2, this.w, this.h);
+    renderer.drawImage(this.image, -this.w / 2, -this.h / 2, this.w, this.h);
     renderer.restore();
   };
 
   return MovableSprite;
-})();
+}());
 
 // eslint-disable-next-line no-unused-vars
-var Bullet = (function () {
+var Bullet = (function Bullet() {
   Bullet.prototype = Object.create(FillRect.prototype);
   Object.assign(Bullet.prototype, MovableObject.prototype);
   Bullet.prototype.constructor = Bullet;
 
   function Bullet(x, y, w, h, color, speed, step, direction) {
+    // eslint-disable-next-line no-param-reassign
     if (direction === undefined) direction = directions.EAST;
     FillRect.call(this, x, y, w, h, color);
     MovableObject.call(this, x, y, speed, direction, step, step);
   }
 
-  Bullet.prototype.destroy = function () {
+  Bullet.prototype.destroy = function destroy() {
     this.dead = true;
   };
 
-  Bullet.prototype.draw = function (renderer) {
-    if(!this.dead){
-      FillRect.prototype.draw.call(this,renderer);
+  Bullet.prototype.draw = function draw(renderer) {
+    if (!this.dead) {
+      FillRect.prototype.draw.call(this, renderer);
     }
   };
 
   return Bullet;
-})();
+}());
 
 // eslint-disable-next-line no-unused-vars
-var SingleBullet = (function () {
-  SingleBullet.prototype = Object.create(Bullet.prototype);
-  SingleBullet.prototype.constructor = SingleBullet;
-
+var SingleBullet = (function SingleBullet() {
   function SingleBullet(x, y, w, h, color, speed, step, direction) {
     Bullet.call(this, x, y, w, h, color, speed, step, direction);
   }
+  SingleBullet.prototype = Object.create(Bullet.prototype);
+  SingleBullet.prototype.constructor = SingleBullet;
+
   return SingleBullet;
-})();
+}());
 
 // eslint-disable-next-line no-unused-vars
-var DualShotBullet = (function () {
-  DualShotBullet.prototype = Object.create(Bullet.prototype);
-  DualShotBullet.prototype.constructor = DualShotBullet;
-
-  function DualShotBullet(x, y, w, h, color, speed, step, direction,offset) {
+var DualShotBullet = (function DualShotBullet() {
+  function DualShotBullet(x, y, w, h, color, speed, step, direction, offset) {
     // Bullet.call(this, x, y, w, h, color, speed, step, direction);
-    var x1,x2,y1,y2;
+    var x1; var x2; var y1; var y2;
     switch (this.direction) {
     case directions.EAST:
       x1 = x;
@@ -255,19 +264,27 @@ var DualShotBullet = (function () {
     default:
       break;
     }
-    this._bullet1 = new Bullet(x1, y1, w, h, color, speed, step, direction);
-    this._bullet2 = new Bullet(x2, y2, w, h, color, speed, step, direction);
+    this.bullet1 = new Bullet(x1, y1, w, h, color, speed, step, direction);
+    this.bullet2 = new Bullet(x2, y2, w, h, color, speed, step, direction);
   }
 
-  DualShotBullet.prototype.draw = function (renderer) {
-    this._bullet1.draw(renderer);
-    this._bullet2.draw(renderer);
+  DualShotBullet.prototype = Object.create(Bullet.prototype);
+  DualShotBullet.prototype.constructor = DualShotBullet;
+
+  DualShotBullet.prototype.draw = function draw(renderer) {
+    this.bullet1.draw(renderer);
+    this.bullet2.draw(renderer);
   };
 
-  DualShotBullet.prototype.update = function(){
-    this._bullet1.update();
-    this._bullet2.update();
+  DualShotBullet.prototype.update = function update() {
+    this.bullet1.update();
+    this.bullet2.update();
   };
 
   return DualShotBullet;
-})();
+}());
+
+module.exports = {
+  Rectangle: Rectangle,
+  Sprite: Sprite
+};
