@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb-base/legacy",
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "no-shadow":"off",
+    "no-plusplus":"off",
+    "no-use-before-define":"off",
+    "no-param-reassign":"off",
+    "func-names":"off"
+  },
+  "env": {
+    "jasmine": true
+  }
+}
