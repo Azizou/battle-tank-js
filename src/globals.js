@@ -5,3 +5,5 @@ var directions = {
   EAST: 2,
   WEST: 3
 };
+
+module.exports = directions;
