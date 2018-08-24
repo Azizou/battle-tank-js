@@ -9,7 +9,7 @@ Les composant du jeux:
 - une base que le joueurs protege alors qu'il attaque les enemis
 - des enemis avec different capacites (balle, durabilite, vitesse)
 - le terrain
-- les element de l'environment (eau, block cassable et non cassable, les herbre, des zone glissants
+- les elements de l'environment (eau, block cassable et non cassable, les herbre, des zone glissants
 - des collectibles pour le joueur (etoile, casque, bombe, pelle pour renforcer la base
 
 
