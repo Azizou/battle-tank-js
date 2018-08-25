@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for spec\gameObjects\rectangleSpec.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">spec/gameObjects/</a> rectangleSpec.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>46/46</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>46/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Rectangle = require('../../src/gameObjects/rectangle');
+&nbsp;
+describe('Rectangle', function () {
+  var rect;
+  it('should construct', function () {
+    rect = new Rectangle(0, 0, 0, 0);
+    expect(rect).toBeTruthy();
+  });
+&nbsp;
+  it('should compute corners and center point correctly', function () {
+    rect = new Rectangle(1, 1, 1, 1);
+    expect(rect.left).toBe(1);
+    expect(rect.top).toBe(1);
+    expect(rect.right).toBe(2);
+    expect(rect.bottom).toBe(2);
+    expect(rect.centerX).toBe(1.5);
+    expect(rect.centerY).toBe(1.5);
+  });
+&nbsp;
+  describe('Rectangle#overlap', function () {
+    var rect1;
+    var rect2;
+    var onOverlapCallback;
+    it('should have the method overlap', function () {
+      rect1 = Rectangle.ZERO;
+      expect(rect1.overlap).toBeDefined();
+      expect(typeof rect1.overlap).toBe('function');
+    });
+&nbsp;
+    it('should return true when 2 rectangles overlap', function () {
+      rect1 = new Rectangle(0, 0, 1, 1);
+      rect2 = new Rectangle(0.5, 0.5, 1.5, 1.5);
+      expect(rect1.overlap(rect2, undefined)).toBe(true);
+    });
+&nbsp;
+    it('should return false when 2 rectangles do not overlap', function () {
+      rect1 = new Rectangle(0, 0, 1, 1);
+      rect2 = new Rectangle(1.01, 1, 1.5, 1.5);
+      expect(rect1.overlap(rect2, undefined)).toBe(false);
+    });
+&nbsp;
+    it('should return true when 2 rectangles touches', function () {
+      rect1 = new Rectangle(0, 0, 1, 1);
+      rect2 = new Rectangle(1, 1, 1.5, 1.5);
+      expect(rect1.overlap(rect2, undefined)).toBe(true);
+    });
+&nbsp;
+    it('should invoke the callback when 2 rectangles overlap', function () {
+      rect1 = new Rectangle(0, 0, 1, 1);
+      rect2 = new Rectangle(0.5, 0.5, 1.5, 1.5);
+      onOverlapCallback = jasmine.createSpy('onOverlapCallback');
+      expect(rect1.overlap(rect2, onOverlapCallback)).toBe(true);
+      expect(onOverlapCallback).toHaveBeenCalled();
+    });
+&nbsp;
+    it('should not invoke the callback when 2 rectangles do not overlap', function () {
+      rect1 = new Rectangle(0, 0, 1, 1);
+      rect2 = new Rectangle(1.01, 1, 1.5, 1.5);
+      onOverlapCallback = jasmine.createSpy('onOverlapCallback');
+      expect(rect1.overlap(rect2, onOverlapCallback)).toBe(false);
+      expect(onOverlapCallback).not.toHaveBeenCalled();
+    });
+  });
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Aug 25 2018 01:50:17 GMT+0200 (South Africa Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
