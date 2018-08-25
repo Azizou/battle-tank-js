@@ -1,4 +1,4 @@
-var Rectangle = require('../../src/gameObjects/rectangle');
+var Rectangle = require('../../test-tmp/gameObjects/rectangle');
 
 describe('Rectangle', function () {
   var rect;

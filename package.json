@@ -6,9 +6,10 @@
   "scripts": {
     "lint": "eslint src/*.js",
     "lint-fix": "eslint src/*.js --fix",
-    "test": "jasmine",
+    "test": "jasmine dist/test-bundle.js",
     "pre-build": "npm run lint && npm test",
     "browserify": "browserify src/test.js -o dist/bundle.js",
+    "browserify-test": "browserify spec/index.js -o dist/test-bundle.js",
     "uglifyjs": "uglifyjs --compress --mangle --source-map -o dist/bundle.min.js -- dist/bundle.js",
     "coverage": "istanbul cover node_modules/jasmine/bin/jasmine.js"
   },
@@ -29,9 +30,12 @@
     "eslint-plugin-import": "^2.14.0",
     "express": "^4.16.3",
     "gulp": "^4.0.0",
+    "gulp-istanbul": "^1.1.3",
     "gulp-jasmine-browser": "^4.0.0",
     "istanbul": "^0.4.5",
     "jasmine": "^3.2.0",
+    "puppeteer": "^1.7.0",
     "uglify-js": "^3.4.8"
-  }
+  },
+  "dependencies": {}
 }

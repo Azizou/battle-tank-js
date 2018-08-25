@@ -1,5 +1,6 @@
-var Rectangle = require('../../src/gameObjects/rectangle');
-var Sprite = require('../../src/gameObjects/sprite');
+// var Rectangle = require('../../gameObjects/rectangle');
+var Rectangle = require('../../test-tmp/gameObjects/rectangle');
+var Sprite = require('../../test-tmp/gameObjects/sprite');
 describe('Sprite', function () {
   var sprite;
   it('should construct', function () {
