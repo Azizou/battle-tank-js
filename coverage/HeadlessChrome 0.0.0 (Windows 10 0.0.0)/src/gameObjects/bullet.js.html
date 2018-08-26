@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src\gameObjects\sprite.js</title>
+    <title>Code coverage report for src\gameObjects\bullet.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">src/gameObjects/</a> sprite.js
+      <a href="../../index.html">all files</a> / <a href="index.html">src/gameObjects/</a> bullet.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">68.42% </span>
+        <span class="strong">56.25% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>13/19</span>
+        <span class='fraction'>9/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/4</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">68.42% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>13/19</span>
+        <span class='fraction'>9/15</span>
       </div>
     </div>
   </div>
@@ -70,31 +70,19 @@
 25
 26
 27
-28
-29
-30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+28</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -103,43 +91,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var Rectangle = require('./rectangle');
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var FillRect = require('./fillRect');
+var MovableObject = require('./movableObject');
+var directions = require('../globals');
 &nbsp;
-Sprite.prototype = Object.create(Rectangle.prototype);
-Sprite.prototype.constructor = Sprite;
 &nbsp;
-function Sprite(x, y, w, h, imagePath, onLoadCallback) {
-  Rectangle.call(this, x, y, w, h);
-  this.src = imagePath;
-  this.ready = true;
-  this.onLoadCallback = onLoadCallback;
-  this.loadImage();
+Bullet.prototype = Object.create(FillRect.prototype);
+Object.assign(Bullet.prototype, MovableObject.prototype);
+Bullet.prototype.constructor = Bullet;
+&nbsp;
+function Bullet(x, y, w, h, color, speed, step, direction) <span class="fstat-no" title="function not covered" >{</span>
+  // eslint-disable-next-line no-param-reassign
+<span class="cstat-no" title="statement not covered" >  if (direction === undefined) <span class="cstat-no" title="statement not covered" >direction = directions.EAST;</span></span>
+<span class="cstat-no" title="statement not covered" >  FillRect.call(this, x, y, w, h, color);</span>
+<span class="cstat-no" title="statement not covered" >  MovableObject.call(this, x, y, speed, direction, step, step);</span>
 }
 &nbsp;
-&nbsp;
-Sprite.prototype.loadImage = function loadImage() {
-  this.image = new Image();
-<span class="cstat-no" title="statement not covered" >  this.image.onload = <span class="fstat-no" title="function not covered" >function onload(response) {</span></span>
-<span class="cstat-no" title="statement not covered" >    this.ready = true;</span>
-<span class="cstat-no" title="statement not covered" >    if (typeof this.onLoadCallback === 'function') {</span>
-<span class="cstat-no" title="statement not covered" >      this.onLoadCallback.call(null, response);</span>
-    }
-  };
-<span class="cstat-no" title="statement not covered" >  this.image.src = this.src;</span>
+Bullet.prototype.destroy = function destroy() <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  this.dead = true;</span>
 };
 &nbsp;
-Sprite.prototype.draw = <span class="fstat-no" title="function not covered" >function draw(render) {</span>
-<span class="cstat-no" title="statement not covered" >  render.drawImage(this.image, this.x, this.y, this.w, this.h);</span>
+Bullet.prototype.draw = function draw(renderer) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  if (!this.dead) {</span>
+<span class="cstat-no" title="statement not covered" >    FillRect.prototype.draw.call(this, renderer);</span>
+  }
 };
 &nbsp;
-module.exports = Sprite;
+module.exports = Bullet;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Aug 25 2018 02:01:16 GMT+0200 (South Africa Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Aug 26 2018 04:06:19 GMT+0200 (South Africa Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
