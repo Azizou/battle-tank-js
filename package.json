@@ -6,8 +6,11 @@
   "scripts": {
     "lint": "eslint src/*.js",
     "lint-fix": "eslint src/*.js --fix",
-    "test": "jasmine",
-    "pre-build": "npm run lint && npm test"
+    "test": "karma start",
+    "pre-build": "npm run lint && npm test",
+    "browserify": "browserify src/test.js -o dist/bundle.js",
+    "uglifyjs": "uglifyjs --compress --mangle --source-map -o dist/bundle.min.js -- dist/bundle.js",
+    "coverage": "istanbul cover node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +23,25 @@
   },
   "homepage": "https://github.com/Azizou/battle-tank-js#readme",
   "devDependencies": {
+    "browserify": "^16.2.2",
+    "browserify-istanbul": "^3.0.1",
     "eslint": "^5.4.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "express": "^4.16.3",
     "gulp": "^4.0.0",
-    "jasmine": "^3.2.0"
+    "gulp-jasmine-browser": "^4.0.0",
+    "istanbul": "^0.4.5",
+    "jasmine": "^3.2.0",
+    "karma": "^3.0.0",
+    "karma-browserify": "^5.3.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-jasmine": "^1.1.2",
+    "karma-spec-reporter": "0.0.32",
+    "puppeteer": "^1.7.0",
+    "requirejs": "^2.3.5",
+    "uglify-js": "^3.4.8",
+    "watchify": "^3.11.0"
   }
 }
