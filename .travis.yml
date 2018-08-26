@@ -1,5 +1,9 @@
 language: node_js
 node_js: node
+dist: trusty
+sudo: required
+addons:
+  chrome: stable
 cache:
   directories:
     - "node_modules"
